@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+  <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="700" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	d3.json('subzone.json',function(data) {
+
+		/* This task is a bit more complicated than previous tasks, breaking it down, you'll need to:
+		
+		1. Write your own colour scale with an appropriate domain (find the extent maybe?). Keep in mind that you'll need to different scales for different metrics (HDB, Total, etc)
+		2. Modify the code below to color in each subzone according to the scale (s) you created.
+		3. Add some sort of user interaction to understand the other metric (HDB, total, etc). You could consider writing a completely different visualization, such as a bar chart, that changes
+		depending on interaction with the map. Or you could between the different metrics. */
+
+		/* As with the previous task, the centroid and geoPath() conversions are defined. */
+		var center = d3.geoCentroid(data);
+		var projection = d3.geoMercator();	
+		var paths = d3.geoPath().projection(projection);
+
+		var scale_factor = 90000;
+
+		/* The correct scale and translation necessary to position the map in the center of the SVG was manually found by trial and error */
+		projection.scale(scale_factor);
+		projection.center(center);
+		projection.translate([-scale_factor*3.137,scale_factor/20]);
+
+		var svg = d3.select('#svg');
+
+		/* Write your own Scales and Extents here */
+
+
+		/* Modify the code below to shade the different subzones according to population per area. */
+		svg.selectAll('path')
+			.data(data.features)
+			.enter()
+			.append('path')
+			.attr('class','bounds')
+			.attr('d',paths)
+			.attr('fill','none')
+			.attr('stroke','black')
+			.attr('stroke-width','1px');
+
+	});
+
+</script>
+</html>

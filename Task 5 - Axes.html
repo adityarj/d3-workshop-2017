@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to d3.js - Task 5</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="1500" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	/* This task builds on what was done for the last task by introducing axes and another dimension of data. Hence, this visualization requires 3 different scales for each dimension.
+
+	Your task is to:
+	1. Add another axis for the GST contribution, you may reference the axis already created
+	2. Choose a particular visualization type (scatterplot, bar chart or something else) and visualize the provided data with the given scales. 
+	3. Add labels to identify the different sectors - which are scaled by color. */ 
+
+	d3.csv('gst_by_economic_sector.csv',function(data) {
+
+		var margin = 100,
+		width = 900,
+		height = 500;
+
+		/* The following code is to extract the number of years. A set removes duplicates, which the data contains */
+		var years = new Set(data.map(function(d) {
+			return d.financial_year;
+		}))
+
+		/* By defining the range of the scale to start from the predefined margin, a certain space is reserved on the left side of this chart.
+		This is to account for the Y axis that you'll need to add later. */
+		var x = d3.scalePoint()
+			.domain(Array.from(years))
+			.range([margin,width - margin])
+			.round(true);
+
+		/* The following code is to map each sector name to a particular color */
+		var sector_domain = data.slice(11).map(function(d) {
+			return d.economic_sector;
+		})
+
+		var color = d3.scaleOrdinal()
+			.domain(sector_domain)
+			.range(d3.schemeCategory10)
+
+
+		/* The last scale to create for the GST contribution. A margin needs to be considered again because of the above reason - to prevent the Y axis
+		you create from being cut off */
+		var gst_extent = d3.extent(data,function(d) {return +d.net_gst_contribution});
+
+		var y = d3.scaleLinear()
+					.domain(gst_extent)
+					.range([height,margin]);
+
+		var svg = d3.select('#svg');
+
+		svg.append('g')
+			.attr('transform','translate(0,'+height+")")
+			.call(d3.axisBottom(x));
+
+		/* Write your code below */
+
+	});
+
+	
+
+</script>
+</html>

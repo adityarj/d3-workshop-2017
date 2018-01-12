@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to d3.js - Example 3</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+
+
+</head>
+
+<body>
+	<div></div>
+	<svg width="500" height="500" id="svg">
+	</svg> 
+</body>
+
+<script type="text/javascript">
+	
+	var colors = ['blue','green'];
+
+	var rectangles = d3.select('#svg')
+			.selectAll('rect');
+
+	rectangles = rectangles.data(colors);
+			
+	rectangles.enter()
+			.append('rect')
+			.attr('x',function(d,i) {
+				return 10 + 90*i;
+			})
+			.attr('y',30)
+			.attr('width',80)
+			.attr('height',20)
+			.attr('fill',function(d,i) {
+				return d;
+			});
+
+</script>
+</html>

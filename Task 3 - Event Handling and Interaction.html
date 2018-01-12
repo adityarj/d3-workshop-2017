@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to d3.js - Task 3</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+
+
+</head>
+
+<body>
+	<svg width="1500" height="1500" id="svg">
+		
+	</svg>
+</body>
+
+<script type="text/javascript">
+
+	/* For this task, you'll need to modify the code below to handle an event, in this case, a 'click' */
+
+	/* Add on to the code below */
+	d3.select('#svg')
+		.append('circle')
+		.attr('r',50)
+		.attr('cx',100)
+		.attr('cy',100)
+		.attr('fill','orange')
+		.on('mouseover',function() {
+
+			/* Using this as argument to select() leads to the selection of the element that is currently being interacted on.
+			The transition() and duration(time) functions are written before any changes to the attributes of the selected element.
+			D3 will then interpolate the change in attributes over the specified time */
+
+			d3.select(this).transition().duration(500).attr('fill','blue');
+		})
+		.on('mouseout',function() {
+
+			/* In D3, accounting for state reversion is essential and hence this segment of this code reverts the change that a mouseover does in the above case */
+			
+			d3.select(this).transition().duration(500).attr('fill','orange');
+		})
+</script>
+</html>

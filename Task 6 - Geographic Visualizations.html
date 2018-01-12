@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to d3.js - Task 6</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+  <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="1500" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	/* In this task we'll be moving to geographic visualizations and dealing with GeoJSON data.
+
+	Your task is to :
+	1. Complete the code below and add the other two tracks provided in the MRT_data folder
+	2. Modify the code (or write a new function) to add the stations for each line from the provided MRT_data folder */
+
+	/* The d3.json() function works in pretty much the same way as d3.csv(). The singapore.json file is a GEO JSON of Singapore, divided according to its planning areas. */
+	d3.json('singapore.json',function(data) {
+
+
+		/* The next sequence of functions might be confusing, lets look at them one by one */
+
+		/* A projection transforms geographic coordinates into 2D coordinates. D3 caters to a wide range of projections, but this particular function handles the Mercator projection. */
+
+		var projection = d3.geoMercator();
+
+		/* The geoCentroid() function finds the centroid of a set of  GeoJSON features. This is necessary since the dataset we're using is focused on Singapore 
+		which won't be visible on the SVG base, which is quite small, if the center of the Earth itself is taken. */
+
+		var center = d3.geoCentroid(data);
+
+		/* This centers the projection according to the centroid that was just calculated */
+
+		projection.center(center);
+	
+		/* The geoPath() function translates GeoJSON features (which could be complex shapes or boundaries) into instructions for a path element's d attribute */
+
+ 		var paths = d3.geoPath().projection(projection);
+
+ 		/* Finally, Singapore is really small with respect to the world. It is necessary to blow up the projection so that an appreciably sized Singapore is visible on the SVG base.
+ 		Note that the argument to scale really depends on the raw data you get. I manually experimented to obtain this particular value */
+
+		projection.scale(84000);
+
+		var svg = d3.select('#svg');
+
+		svg.append('path')
+			.attr('class','bounds')
+			.datum(data)
+			.attr('d',paths)
+			.style('fill','none')
+			.style('stroke','#A8A8A8')
+
+		/* The d3 queue() function allows the sequential execution of asynchronous tasks such as loading files. 
+		While in this case, we don't particularly require the files to be loaded sequentially, it sure is convenient.
+		The function takes another function and that functions arguments as its arguments */
+
+		d3.queue()
+			.defer(render_lines,'MRT_data/NSL_track.geojson','red')
+			.defer(render_lines,'MRT_data/EWL_track.geojson','green')
+
+		/* Write your code here */
+
+		/* This render function takes a particular GEO JSON file name, containing a MRT track, and a color then loads the file and colors the stroke
+		of the track with the given color before appending it to the SVG base.*/
+
+		function render_lines(file,color) {
+
+			d3.json(file,function (data) {
+
+				svg.append('path')
+					.attr('class','map')
+					.datum(data)
+					.attr('d',paths)
+					.style('fill','none')
+					.style('stroke',color)
+
+			});
+		}
+
+	})
+
+	
+
+</script>
+</html>

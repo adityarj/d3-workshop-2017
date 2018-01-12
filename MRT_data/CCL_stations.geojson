@@ -1,0 +1,341 @@
+{
+	"type" : "FeatureCollection",
+	"features" : [
+		{
+            "type": "Feature",
+            "properties": {
+                "name": "Bras Basah MRT Station",
+                "desc": "GPS: 1.29757, 103.8505<br>http:\/\/www.timothytye.com\/asia\/singapore\/bras-basah-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8505036,
+                    1.2975793
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Esplanade MRT Station",
+                "desc": "GPS: 1.29359, 103.85541<br>http:\/\/www.timothytye.com\/asia\/singapore\/esplanade-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.855412,
+                    1.2935946
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bayfront MRT Station",
+                "desc": "GPS: 1.28134, 103.85882<br>http:\/\/www.timothytye.com\/asia\/singapore\/bayfront-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8588238,
+                    1.2813454
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Promenade MRT Station",
+                "desc": "GPS: 1.29389, 103.86<br>http:\/\/www.timothytye.com\/asia\/singapore\/promenade-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8600039,
+                    1.2938949
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Nicoll Highway MRT Station",
+                "desc": "GPS: 1.2996, 103.86399<br>http:\/\/www.timothytye.com\/asia\/singapore\/nicoll-highway-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8639951,
+                    1.2996012
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Stadium MRT Station",
+                "desc": "GPS: 1.30273, 103.87528<br>http:\/\/www.timothytye.com\/asia\/singapore\/stadium-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8752818,
+                    1.3027332
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Mountbatten MRT Station",
+                "desc": "GPS: 1.30631, 103.88244<br>http:\/\/www.timothytye.com\/asia\/singapore\/mountbatten-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8824487,
+                    1.3063157
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Dakota MRT Station",
+                "desc": "GPS: 1.30837, 103.88871<br>http:\/\/www.timothytye.com\/asia\/singapore\/dakota-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8887143,
+                    1.3083751
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "MacPherson MRT Station",
+                "desc": "GPS: 1.32678, 103.89019<br>http:\/\/www.timothytye.com\/asia\/singapore\/macpherson-mrt-station.htm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8901949,
+                    1.3267809
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Tai Seng MRT Station",
+                "desc": "GPS: 1.3354, 103.88817<br>http:\/\/www.timothytye.com\/asia\/singapore\/tai-seng-mrt-station.htm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8881779,
+                    1.3354046
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bartley MRT Station",
+                "desc": "GPS: 1.34276, 103.87991<br>http:\/\/www.timothytye.com\/asia\/singapore\/bartley-mrt-station.htm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8799167,
+                    1.3427626
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Lorong Chuan MRT Station",
+                "desc": "GPS: 1.35164, 103.86285<br>http:\/\/www.timothytye.com\/asia\/singapore\/lorong-chuan-mrt-station.htm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8628578,
+                    1.3516436
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Marymount MRT Station",
+                "desc": "GPS: 1.34913, 103.83946<br>http:\/\/www.timothytye.com\/asia\/singapore\/marymount-mrt-station.htm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.839469,
+                    1.3491337
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Caldecott MRT Station",
+                "desc": "GPS: 1.33776, 103.8394<br>http:\/\/www.timothytye.com\/asia\/singapore\/caldecott-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8394046,
+                    1.3377643
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bukit Brown MRT Station (not operational)",
+                "desc": "GPS:\u00a01.33373, 103.83064<br>http:\/\/www.timothytye.com\/asia\/singapore\/bukit-brown-mrt-station.htm"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8306499,
+                    1.3337367
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Botanic Gardens MRT Station",
+                "desc": "GPS: 1.3224, 103.81505<br>http:\/\/www.timothytye.com\/asia\/singapore\/botanic-gardens-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8150501,
+                    1.3224047
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Farrer Road MRT Station",
+                "desc": "GPS: 1.31725, 103.80749<br>http:\/\/www.timothytye.com\/asia\/singapore\/farrer-road-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.807497,
+                    1.3172563
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Holland Village MRT Station",
+                "desc": "GPS: 1.3112, 103.79595<br>http:\/\/www.timothytye.com\/asia\/singapore\/holland-village-mrt-station.htm\u00a0\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.7959528,
+                    1.3112068
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "one-north MRT Station",
+                "desc": "GPS: 1.29923, 103.78694<br>http:\/\/www.timothytye.com\/asia\/singapore\/one-north-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.7869406,
+                    1.2992365
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Kent Ridge MRT Station",
+                "desc": "GPS: 1.29245, 103.78466<br>http:\/\/www.timothytye.com\/asia\/singapore\/kent-ridge-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.7846661,
+                    1.2924576
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Haw Par Villa MRT Station",
+                "desc": "GPS: 1.28237, 103.78183<br>http:\/\/www.timothytye.com\/asia\/singapore\/haw-par-villa-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.7818336,
+                    1.2823751
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Pasir Panjang MRT Station",
+                "desc": "GPS: 1.27628, 103.79118<br>http:\/\/www.timothytye.com\/asia\/singapore\/pasir-panjang-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.7911892,
+                    1.2762826
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Labrador Park MRT Station",
+                "desc": "GPS: 1.27233, 103.80273<br>http:\/\/www.timothytye.com\/asia\/singapore\/labrador-park-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8027334,
+                    1.2723354
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Telok Blangah MRT Station",
+                "desc": "GPS: 1.2707, 103.80972<br>http:\/\/www.timothytye.com\/asia\/singapore\/telok-blangah-mrt-station.htm\u00a0"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8097286,
+                    1.270705
+                ]
+            }
+        }
+	]
+}
