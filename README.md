@@ -1,6 +1,9 @@
 # D3 Workshop 2017 Code and Examples
 Tasks and examples for the Introuction to d3.js workshop during IAP 2017
 
+Slides Day 1 - https://goo.gl/GYNUf6
+Slides Day 2 - https://goo.gl/QpmEL8
+
 ## How to use this repository
 
 1. Clone or download this repo
