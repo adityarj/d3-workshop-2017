@@ -69,7 +69,7 @@
 		d3.queue()
 			.defer(render_lines,'MRT_data/NSL_track.geojson','red')
 			.defer(render_lines,'MRT_data/EWL_track.geojson','green')
-
+			.defer(render_stations,'MRT_data/NSL_stations.geojson','red');
 		/* Write your code here */
 
 		/* This render function takes a particular GEO JSON file name, containing a MRT track, and a color then loads the file and colors the stroke
@@ -87,6 +87,19 @@
 					.style('stroke',color)
 
 			});
+		}
+
+		function render_stations(file,color) {
+
+			d3.json(file,function (data) {
+
+				svg.append('path')
+					.attr('class','map')
+					.datum(data)
+					.attr('d',paths)
+					.style('fill',color)
+					.style('stroke','none');
+			})
 		}
 
 	})

@@ -16,18 +16,25 @@
 <body>
 	<div></div>
 	<svg width="500" height="500" id="svg">
+		<rect x="50" y="50" width="50" height="50"></rect>
+		<rect x="50" y="200" width="50" height="50"></rect>
 	</svg> 
-	<svg width="500" height="500" id="svg2">
-	</svg>
 </body>
 
 <script type="text/javascript">
 	
-	d3.selectAll('svg')
-			.append('circle')
-			.attr('cx',50)
-			.attr('cy',50)
-			.attr('r',50)
+	d3.select('#svg')
+		.append('rect')
+		.attr('x',50)
+		.attr('y',250)
+		.attr('width',50)
+		.attr('height',50)
+		.append('rect')
+		.attr('x',100)
+		.attr('y',250)
+		.attr('width',50)
+		.attr('height',50)
+
 
 </script>
 </html>

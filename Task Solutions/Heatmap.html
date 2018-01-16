@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js - Task 4</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="1500" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	d3.csv('../gst_by_economic_sector.csv',function(data) {
+
+		var box_size = 110;
+
+		var extent = d3.extent(data,function(d,i) {
+			return +d.net_gst_contribution;
+		})
+
+		var heatmap = d3.scaleQuantize()
+				.domain(extent)
+				.range(["blue","green","yellow","orange","red"]);
+
+		var industries = data.slice(11).map(function(d) {
+			return d.economic_sector;
+		})
+
+		var industry = d3.scaleBand()
+				.domain(industries)
+				.range([0,11*110]);
+
+		d3.select('#svg')
+			.selectAll('rect')
+			.data(data)
+			.enter()
+			.append('rect')
+			.attr('fill',function(d,i) {
+				return heatmap(+d.net_gst_contribution);
+			})
+			.attr('width',box_size)
+			.attr('height',box_size)
+			.attr('x',function (d,i) {
+				return box_size + industry(d.economic_sector);
+			})
+			.attr('y',function (d,i) {
+				return box_size + Math.floor(i/11)*box_size;
+			})
+			.on('mouseover',function(d,i) {
+				d3.select('#svg').selectAll('rect').transition().duration(200).style('opacity',0.5);
+				d3.select(this).transition().duration(200).style('opacity',1);
+			})
+			.on('mouseout',function(d,i) {
+				d3.select('#svg').selectAll('rect').transition().duration(200).style('opacity',1);
+			})
+
+		d3.select('#svg')
+			.selectAll('text')
+			.data(data.slice(1,12))
+			.enter()
+			.append('text')
+			.text(function (d,i) {
+				return d.economic_sector
+			})
+			.attr('x',function (d,i) {
+				return box_size + i*box_size;
+			})
+			.attr('y',box_size*5 + 20)
+			.style('font-size','7px');
+
+		d3.select('#svg')
+			.selectAll('.year')
+			.data(['2013','2014','2015','2016'])
+			.enter()
+			.append('text')
+			.text(function(d,i) {
+				return d;
+			})
+			.attr('x',box_size*12 + 20)
+			.attr('y',function(d,i) {
+				return box_size*1.5 + i*(box_size);
+			})
+
+	});
+
+	
+
+</script>
+</html>

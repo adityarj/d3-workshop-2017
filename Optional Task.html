@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+  
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body>
+	<div id="heatmapDiv"></div>
+</body>
+
+<script type="text/javascript">
+
+	/* In this task, all of the code to create the base visualzation has already been done.
+	Plotly works by taking in data and using a template. For a heatmap, this means havng a matrix of 
+	the two dimensional data (z) and then the values of the two dimensions (x and y) as the other inputs.
+
+	Since the data in the CSV does not match this format, the first few lines of the code attempt to change the given
+	data to the required format */
+
+	d3.csv('gst_by_economic_sector.csv',function(data) {
+
+
+		var matrix = []
+
+		for (var i = 0; i<data.length; i+=11) {
+			matrix.push(data.slice(i,i+11).map(function (d) {return +d.net_gst_contribution}));
+		}
+
+		console.log(matrix);
+
+		/* Modify the below code. Consider changing the colors and/or the labels? */
+		var data = [{
+			type: 'heatmap',
+			x: data.slice(11).map(function (d) {return d.economic_sector}), //This mapping function returns all the economic sectors by name
+			y: ['2013','2014','2015','2016'], //This is the simpler way of getting the years instead of writing another function
+			z: matrix
+		}]
+
+		Plotly.newPlot('heatmapDiv',data)
+	});
+
+	
+
+</script>
+</html>

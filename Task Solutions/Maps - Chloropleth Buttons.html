@@ -1,0 +1,121 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js - Task 7</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js"></script>
+  <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="700" id="svg"></svg>
+	<div class="buttons">
+		<button id="total">Total</button>
+		<button id="hdb">HDB</button>
+		<button id="condo">Condos and Other Apartments</button>
+		<button id="landed">Landed Property</button>
+	</div>
+</body>
+
+<script type="text/javascript">
+
+	d3.json('../subzone.json',function(data) {
+
+		var center = d3.geoCentroid(data);
+		var projection = d3.geoMercator();	
+		var paths = d3.geoPath().projection(projection);
+
+		var scale_factor = 90000;
+		projection.scale(scale_factor);
+		projection.center(center);
+		projection.translate([-scale_factor*3.137,scale_factor/20]);
+
+		var svg = d3.select('#svg');
+
+		console.log(data);
+
+		var total_extent = d3.extent(data.features,function(d,i) {
+			return +d.properties['Total Population']/d.properties['SHAPE_Area']
+		});
+
+		var hdb_extent = d3.extent(data.features,function(d,i) {
+			return +d.properties['Total HDB']/d.properties['SHAPE_Area']
+		});
+
+		var condo_extent = d3.extent(data.features,function(d,i) {
+			return +d.properties['Condos and Other Apartments']/d.properties['SHAPE_Area']
+		});
+
+		var landed_extent = d3.extent(data.features,function(d,i) {
+			return +d.properties['Landed Properties']/d.properties['SHAPE_Area']
+		});
+
+		var total_scale = d3.scaleLinear()
+						.domain(total_extent)
+						.range([0,1]);
+
+		var hdb_scale = d3.scaleLinear()
+						.domain(hdb_extent)
+						.range([0,1]);
+
+		var condo_scale = d3.scaleLinear()
+						.domain(condo_extent)
+						.range([0,1]);
+
+		var landed_scale = d3.scaleLinear()
+						.domain(landed_extent)
+						.range([0,1]);
+
+		svg.selectAll('path')
+			.data(data.features)
+			.enter()
+			.append('path')
+			.attr('class','bounds')
+			.attr('d',paths)
+			.attr('fill',function(d,i) {
+				return d3.interpolatePlasma(total_scale(d.properties['Total Population']/d.properties['SHAPE_Area']));
+			})
+			.attr('stroke','none');
+
+		d3.select('#total')
+			.on('click',function() {
+				update(total_scale,'Total Population');
+			});
+
+		d3.select('#hdb')
+			.on('click',function() {
+				update(hdb_scale,'Total HDB');
+			});
+
+		d3.select('#condo')
+			.on('click',function() {
+				update(condo_scale,'Condos and Other Apartments');
+			})
+
+		d3.select('#landed')
+			.on('click',function() {
+				update(landed_scale,'Landed Properties');
+			})
+
+		function update(scale,property) {
+			svg.selectAll('path')
+				.transition()
+				.duration(500)
+				.attr('fill',function(d,i) {
+					return d3.interpolatePlasma(scale(d.properties[property]/d.properties['SHAPE_Area']))
+				})
+		}
+
+	});
+
+</script>
+</html>

@@ -31,6 +31,7 @@
 	rectangles = rectangles.data(colors);
 			
 	rectangles.attr('fill',function(d,i) {
+					console.log(i);
 					return d;
 			   });
 			
@@ -41,6 +42,7 @@
 			.attr('width',80)
 			.attr('height',20)
 			.attr('fill',function(d,i) {
+				console.log(i);
 				return d;
 			});
 

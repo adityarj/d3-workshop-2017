@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js - Task 5</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="1500" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	d3.csv('../gst_by_economic_sector.csv',function(data) {
+
+		var margin = 100,
+		width = 900,
+		height = 500;
+
+		var years = new Set(data.map(function(d) {
+			return d.financial_year;
+		}))
+
+		var sector_domain = data.slice(11).map(function(d) {
+			return d.economic_sector;
+		})
+
+		console.log(Array.from(years));
+
+		var color = d3.scaleOrdinal()
+			.domain(sector_domain)
+			.range(d3.schemeCategory10)
+
+		var gst_extent = d3.extent(data,function(d) {return +d.net_gst_contribution});
+
+		var x = d3.scalePoint()
+					.domain(Array.from(years))
+					.range([margin,width - margin])
+					.round(true);
+
+		var y = d3.scaleLinear()
+					.domain(gst_extent)
+					.range([height,margin]);
+
+		var svg = d3.select('#svg');
+
+		svg.append('g')
+			.attr('transform','translate(0,'+height+")")
+			.call(d3.axisBottom(x));
+
+		// svg.append('g')
+		// 	.attr('transform','translate('+margin+",0)")
+		// 	.call(d3.axisLeft(y));
+
+		svg.append('g')
+			.selectAll('circle')
+			.data(data)
+			.enter()
+			.append('circle')
+			.attr('r', 3)
+			.attr('cx', function(d,i) {
+				return x(d.financial_year);
+			})
+			.attr('cy', function(d,i) {
+				return y(+d.net_gst_contribution);
+			})
+			.attr('fill', function(d,i) {
+				return color(d.economic_sector);
+			})
+
+	});
+
+	
+
+</script>
+</html>

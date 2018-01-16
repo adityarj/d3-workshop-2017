@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js - Task 6</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+  <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="1500" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	d3.json('../singapore.json',function(data) {
+
+		var center = d3.geoCentroid(data);
+		var projection = d3.geoMercator().center(center);	
+		var paths = d3.geoPath().projection(projection);
+
+		projection.scale(84000);
+
+		var svg = d3.select('#svg');
+
+		var coordinates = [103.8454342,1.3691149]
+
+		svg.append('path')
+			.attr('class','bounds')
+			.datum(data)
+			.attr('d',paths)
+			.style('fill','none')
+			.style('stroke','#A8A8A8')
+
+		d3.queue()
+			.defer(render_lines,'../MRT_data/NSL_track.geojson','red')
+			.defer(render_lines,'../MRT_data/EWL_track.geojson','green')
+			.defer(render_lines,'../MRT_data/DTL_track.geojson','blue')
+			.defer(render_lines,'../MRT_data/CCL_track.geojson','yellow')
+			.defer(render_stations,'../MRT_data/NSL_stations.geojson','red')
+			.defer(render_stations,'../MRT_data/EWL_stations.geojson','green')
+			.defer(render_stations,'../MRT_data/DTL_stations.geojson','blue')
+			.defer(render_stations,'../MRT_data/CCL_stations.geojson','yellow');
+
+		function render_lines(file,color) {
+
+			d3.json(file,function (data) {
+
+				svg.append('path')
+					.attr('class','map')
+					.datum(data)
+					.attr('d',paths)
+					.style('fill','none')
+					.style('stroke',color)
+
+			});
+		}
+
+		function render_stations(file,color) {
+			d3.json(file,function(data) {
+
+				svg.append('path')
+					.attr('class','stations')
+					.datum(data)
+					.attr('d',paths)
+					.style('fill',color)
+			})
+		}
+
+	})
+
+	
+
+</script>
+</html>

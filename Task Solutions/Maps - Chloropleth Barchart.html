@@ -1,0 +1,123 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Introduction to D3.js - Task 7</title>
+  <meta name="description" content="IAP Workshop">
+  <meta name="author" content="Aditya Raju">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.12.0/d3.min.js"></script>
+  <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+</head>
+
+<body>
+	<svg width="1500" height="500" id="svg"></svg>
+</body>
+
+<script type="text/javascript">
+
+	d3.json('../subzone.json',function(data) {
+
+		var center = d3.geoCentroid(data);
+		var projection = d3.geoMercator();	
+		var paths = d3.geoPath().projection(projection);
+
+		var scale_factor = 90000;
+		var margin = 30;
+		var height = 300;
+		var width = 500;
+		var cases = ['HDB','Condos and Other Apartments','Landed Properties'];
+
+		projection.scale(scale_factor);
+		projection.center(center);
+		projection.translate([-scale_factor*3.137,scale_factor/20]);
+
+		var svg = d3.select('#svg');
+
+		var svg2 = svg.append('g').attr('transform','translate(900,0)');
+
+		console.log(data);
+
+		var total_extent = d3.extent(data.features,function(d,i) {
+			return +d.properties['Total Population']/d.properties['SHAPE_Area']
+		});
+
+		var hdb_extent = d3.extent(data.features,function(d,i) {
+			return +d.properties['Total HDB']
+		});
+
+
+		var total_scale = d3.scaleLinear()
+						.domain(total_extent)
+						.range([0,1]);
+
+		var hdb_scale = d3.scaleLinear()
+						.domain(hdb_extent)
+						.range([height,margin]);
+
+		var housing_scale = d3.scalePoint()
+								.domain(cases)
+								.range([margin,width-margin])
+
+		svg.selectAll('path')
+			.data(data.features)
+			.enter()
+			.append('path')
+			.attr('class','bounds')
+			.attr('d',paths)
+			.attr('fill',function(d,i) {
+				return d3.interpolatePlasma(total_scale(d.properties['Total Population']/d.properties['SHAPE_Area']));
+			})
+			.attr('stroke','none')
+			.on('mouseover',function(d,i) {
+				update([d.properties['Total HDB'],d.properties['Condos and Other Apartments'],d.properties['Landed Properties']])
+				d3.select(this).style('opacity',0.5);
+			})
+			.on('mouseout',function(d,i) {
+				d3.select(this).style('opacity',1);
+			})
+
+		svg2.selectAll('.bars')
+			.data([0,0,0])
+			.enter()
+			.append('rect')
+			.attr('class','bars')
+			.attr('x',function(d,i) {
+				return housing_scale(cases[i]) - 25;
+			})
+			.attr('y',function(d,i) {
+				return hdb_scale(d);
+			})
+			.attr('height',function(d,i) {
+				return height - hdb_scale(d);
+			})
+			.attr('width','50px')
+			.attr('fill','blue')
+
+		svg2.append('g')
+			.attr('transform','translate(0,'+height+')')
+			.call(d3.axisBottom(housing_scale));
+		
+		function update(data) {
+
+
+			svg2.selectAll('.bars')
+				.data(data)
+				.transition()
+				.duration(300)
+				.attr('y',function(d,i) {
+					return hdb_scale(d);
+				})
+				.attr('height',function(d,i) {
+					return height - hdb_scale(d);
+				});
+
+		} 
+
+	});
+
+</script>
+</html>

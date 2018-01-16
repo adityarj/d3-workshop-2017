@@ -29,14 +29,21 @@
 	2. User Interaction - You can create a simple mousover user interaction for aesthetics if you wish.
 	3. Text Labels - Text labels are optional, but aren't that hard to make. You'll need to create a new selection if you wish to do so. */
 
-	d3.csv('gst_by_economic_sector.csv',function(data) {
+	d3.csv('gst_by_economic_sector.csv',function(gst_contrib) {
+
+
+		gst_contrib.forEach(function(d) {
+			console.log(+d.financial_year);
+		})
 
 		var box_size = 110;
 
-		var extent = d3.extent(data,function(d,i) {
+		var extent = d3.extent(gst_contrib,function(d,i) {
 			return +d.net_gst_contribution;
 		})
 
+		console.log(extent);
+		
 		var heat_scale = d3.scaleQuantize()
 				.domain(extent)
 				.range(["blue","green","yellow","orange","red"]);
